@@ -31,4 +31,20 @@ public class WarehouseRepository implements WarehouseStore, PanacheRepository<Db
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'findById'");
   }
+
+
+  @Override
+  public long countWarehousesAtLocation(String location) {
+    // Count warehouses at the specified location
+    return count("location", location);
+  }
+
+  @Override
+  public int sumWarehouseCapacitiesAtLocation(String location) {
+    // Sum the capacities of all warehouses at the specified location
+    Long totalCapacity = (long) find("location", location).stream()
+            .mapToInt(DbWarehouse::getCapacity)
+            .sum();
+    return totalCapacity.intValue();
+  }
 }

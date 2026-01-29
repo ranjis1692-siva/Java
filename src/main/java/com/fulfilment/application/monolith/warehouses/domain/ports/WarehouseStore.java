@@ -10,4 +10,9 @@ public interface WarehouseStore {
   void remove(Warehouse warehouse);
 
   Warehouse findByBusinessUnitCode(String buCode);
+
+  long countWarehousesAtLocation(String location);
+
+  // Method to sum warehouse capacities at a specific location
+  int sumWarehouseCapacitiesAtLocation(String location);
 }
