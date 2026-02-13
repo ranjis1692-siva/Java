@@ -1,10 +1,10 @@
 package com.fulfilment.application.monolith.warehouses.adapters.restapi;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.rest-assured.RestAssured;
+import io.restassured.RestAssured;
 import org.junit.jupiter.api.Test;
 
-import static io.rest-assured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
