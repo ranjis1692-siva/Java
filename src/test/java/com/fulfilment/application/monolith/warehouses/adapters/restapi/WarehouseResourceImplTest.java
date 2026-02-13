@@ -1,7 +1,7 @@
 package com.fulfilment.application.monolith.warehouses.adapters.restapi;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
@@ -21,24 +21,27 @@ public class WarehouseResourceImplTest {
 
     @Test
     public void testCreateWarehouse() {
-        String json = "{ \"name\": \"Test Warehouse\", \"location\": \"Amsterdam\" }";
+        // JSON matches Warehouse model fields
+        String json = "{ \"location\": \"Amsterdam\", \"capacity\": 100, \"stock\": 50 }";
 
         given()
-                .contentType("application/json")
+                .contentType(ContentType.JSON)
                 .body(json)
                 .when().post("/warehouse")
                 .then()
                 .statusCode(201)
-                .body("name", is("Test Warehouse"))
-                .body("location", is("Amsterdam"));
+                .body("location", is("Amsterdam"))
+                .body("capacity", is(100))
+                .body("stock", is(50));
     }
 
     @Test
     public void testCreateWarehouseValidationFail() {
-        String json = "{ \"name\": \"\", \"location\": \"\" }";
+        // Invalid data for validation (empty location, capacity < 1, stock < 0)
+        String json = "{ \"location\": \"\", \"capacity\": 0, \"stock\": -1 }";
 
         given()
-                .contentType("application/json")
+                .contentType(ContentType.JSON)
                 .body(json)
                 .when().post("/warehouse")
                 .then()
