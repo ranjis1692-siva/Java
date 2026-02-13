@@ -13,7 +13,7 @@ public class WarehouseResourceImplTest {
     @Test
     public void testGetAllWarehouses() {
         given()
-                .when().get("/warehouses")
+                .when().get("/warehouse")
                 .then()
                 .statusCode(200)
                 .body("$", not(empty()));
@@ -26,7 +26,7 @@ public class WarehouseResourceImplTest {
         given()
                 .contentType("application/json")
                 .body(json)
-                .when().post("/warehouses")
+                .when().post("/warehouse")
                 .then()
                 .statusCode(201)
                 .body("name", is("Test Warehouse"))
@@ -40,7 +40,7 @@ public class WarehouseResourceImplTest {
         given()
                 .contentType("application/json")
                 .body(json)
-                .when().post("/warehouses")
+                .when().post("/warehouse")
                 .then()
                 .statusCode(400);
     }
