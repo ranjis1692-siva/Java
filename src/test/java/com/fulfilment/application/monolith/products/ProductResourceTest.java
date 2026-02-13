@@ -14,7 +14,7 @@ public class ProductResourceTest {
     public void testGetProductById() {
         given()
                 .pathParam("id", 1)
-                .when().get("/products/{id}")
+                .when().get("/product/{id}")
                 .then()
                 .statusCode(200)
                 .body("id", is(1));
@@ -27,7 +27,7 @@ public class ProductResourceTest {
         given()
                 .contentType("application/json")
                 .body(json)
-                .when().post("/products")
+                .when().post("/product")
                 .then()
                 .statusCode(201)
                 .body("name", is("Laptop"));
@@ -37,7 +37,7 @@ public class ProductResourceTest {
     public void testProductErrorMapper() {
         given()
                 .pathParam("id", 9999) // non-existing product
-                .when().get("/products/{id}")
+                .when().get("/product/{id}")
                 .then()
                 .statusCode(404); // triggers ProductResource.ErrorMapper
     }
