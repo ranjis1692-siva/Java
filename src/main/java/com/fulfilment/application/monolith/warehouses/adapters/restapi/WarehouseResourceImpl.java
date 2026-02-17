@@ -30,6 +30,7 @@ public class WarehouseResourceImpl implements WarehouseResource {
             .collect(Collectors.toList());
   }
 
+  @Transactional
   @Override
   public Warehouse createANewWarehouseUnit(@NotNull Warehouse data) {
     // Convert the Warehouse domain model to DbWarehouse entity
